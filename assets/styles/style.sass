@@ -39,6 +39,10 @@ $black: #000
     .burger-line:last-of-type
         display: none 
 
+.opacity
+    opacity: 1 !important
+    transform: translateY(0) !important
+
 // actual styling
 nav
     position: fixed
@@ -197,6 +201,43 @@ main
             background-repeat: no-repeat
             background-position: center
             
+#text_section
+    text-align: center
+    padding: 1rem
+    margin: 5rem 0
+    p
+        max-width: 600px
+        margin: auto
+    h1
+        opacity: 0
+        transform: translateY(-2rem)
+        transition: all 400ms linear
+
+footer
+    display: flex
+    flex-direction:  column
+    gap: 2rem
+    padding: 4rem 2rem
+    background: $black
+    color: $white
+    text-align: center
+    p
+        .cta
+            font-weight: 700
+            color: grey
+    ul
+        display: flex
+        flex-direction: column
+        gap: .5rem
+        list-style: none
+        li:first-of-type
+            text-decoration: underline
+            font-weight: 700
+        li
+            a
+                text-decoration: none
+                color: yellow
+
 @media screen and ( min-width: 600px )
     body
         main
@@ -266,7 +307,14 @@ main
                         background-size: cover
                         background-repeat: no-repeat
                         background-position: center
-            
+            #text_section
+                h1
+                    font-size: 2.3rem
+        footer
+            flex-direction: row
+            align-items: center
+            justify-content: space-around
+
 @media screen and ( min-width: 1000px )
     body
         main

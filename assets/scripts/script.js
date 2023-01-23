@@ -2,9 +2,26 @@
 const nav = document.querySelector('nav');
 const navContainer = document.getElementById('nav-container')
 const burgerMenu = document.querySelector('.burger-menu');
+const h1 = document.querySelectorAll('h1');
 
 let PREVIOUS_SCROLL_VALUE = 0;
 
+// IntersectionObserver
+const observer = new IntersectionObserver(
+    entries => {
+        entries.forEach(entry => {
+            entry.target.classList.toggle("opacity", entry.isIntersecting)
+            if (entry.isIntersecting) observer.unobserve(entry.target);
+        })
+    },
+    {
+        threshold: 1
+    }
+)
+
+h1.forEach(text => {
+    observer.observe(text);
+})
 // functions
 
 
