@@ -6,6 +6,7 @@
     margin: 0
     padding: 0
     box-sizing: inherit
+    -webkit-tap-highlight-color: transparent
 
 body
     box-sizing: border-box
@@ -17,6 +18,7 @@ body
 // variables
 $white: #fff
 $black: #000
+$yellow: #fef3a6
 
 // classes
 .display-none
@@ -95,6 +97,79 @@ nav
             background: $white
             transition: all 300ms linear
 
+#backdrop
+    display: none
+    position: absolute
+    top: 0
+    left: 0
+    width: 100%
+    height: 100%
+    z-index: 1000
+    background: rgba(0, 0, 0, .7)
+
+#quiz-arrow
+    position: sticky
+    top: 50%
+    left: 100%
+    width: 2rem
+    height: 2rem
+    transform: translateY(-50%)
+    color: $black
+    background: rgba(255, 0, 0, .9)
+    padding: 1rem 1rem 2.2rem 1rem
+    border-bottom-left-radius: 100%
+    border-top-left-radius: 100%
+    transform: translateX(.25rem)
+    font-weight: 700
+    z-index: 2
+    cursor: pointer
+    transition: background 300ms linear
+
+#chestionar-UI
+    display: none
+    position: absolute
+    top: 50%
+    left: 50%
+    transform: translate(-50%, -50%)
+    width: 70%
+    max-width: 800px
+    height: 90%
+    background: $white
+    z-index: 1001
+    h1
+        padding: 1rem 0
+        text-align: center
+    .chestionar-UI__text-section
+        // display: none
+        padding: 1rem
+        font-weight: 700
+        font-size: 1.5rem
+        text-align: center
+        p
+            span
+                color: hsl(0, 70%, 50%)
+                &::after
+                    content: '%'
+                    color: $black
+    .chestionar-UI__buttons-section
+        display: none
+        flex-direction: column
+        justify-content: center
+        align-items: center
+        gap: 3rem
+        height: 70%
+        .quizButton
+            padding: 1rem 1.5rem
+            font-size: 1.15rem
+            font-weight: 700
+            border: none
+            box-shadow: 4px 4px 4px 4px rgba(0, 0, 0, .4)
+        #start-quiz__button
+            background: hsl(100, 70%, 50%)
+        #history__button
+            background: $yellow
+
+
 
 main
     margin-top: 4rem
@@ -107,6 +182,7 @@ main
     height: 110vh
     width: 100%
     background: $black
+    transform: translateY(-4rem)
     &::before
         content: ''
         position: absolute
@@ -137,25 +213,25 @@ main
         height: auto
     .big-card:first-of-type
         transform: translate(-57%, -50%) rotate(-3deg)
-        background: url('../images/big1.jpg')
+        background: url('../../images/big1.jpg')
         background-size: cover
         background-repeat: no-repeat
         background-position: center
     .big-card:nth-of-type(2)
         transform: translate(-50%, -50%) rotate(-1deg)
-        background: url('../images/big2.jpg')
+        background: url('../../images/big2.jpg')
         background-size: cover
         background-repeat: no-repeat
         background-position: center
     .big-card:nth-of-type(3)
         transform: translate(-43%, -50%) rotate(1deg)
-        background: url('../images/big3.jpg')
+        background: url('../../images/big3.jpg')
         background-size: cover
         background-repeat: no-repeat
         background-position: center
     .big-card:nth-of-type(4)
         transform: translate(-36%, -50%) rotate(3deg)
-        background: url('../images/big4.jpg')
+        background: url('../../images/big4.jpg')
         background-size: cover
         background-repeat: no-repeat
         background-position: center
@@ -178,25 +254,25 @@ main
 
         .small-card:nth-of-type(5)
             transform: translate(75%, -223%) rotate(7deg)
-            background: url('../images/small1.jpg')
+            background: url('../../images/small1.jpg')
             background-size: cover
             background-repeat: no-repeat
             background-position: center
         .small-card:nth-of-type(6)
             transform: translate(-155%, -223%) rotate(-12deg)
-            background: url('../images/small2.jpg')
+            background: url('../../images/small2.jpg')
             background-size: cover
             background-repeat: no-repeat
             background-position: center
         .small-card:nth-of-type(7)
             transform: translate(70%, 150%) rotate(9deg)
-            background: url('../images/small3.jpg')
+            background: url('../../images/small3.jpg')
             background-size: cover
             background-repeat: no-repeat
             background-position: center
         .small-card:last-of-type
             transform: translate(-150%, 143%) rotate(-12deg)
-            background: url('../images/small4.jpg')
+            background: url('../../images/small4.jpg')
             background-size: cover
             background-repeat: no-repeat
             background-position: center
@@ -248,25 +324,25 @@ footer
                     width: 75px
                 .big-card:first-of-type
                     transform: translate(-67%, -50%) rotate(-3deg)
-                    background: url('../images/big1.jpg')
+                    background: url('../../images/big1.jpg')
                     background-size: cover
                     background-repeat: no-repeat
                     background-position: center
                 .big-card:nth-of-type(2)
                     transform: translate(-50%, -50%) rotate(-1deg)
-                    background: url('../images/big2.jpg')
+                    background: url('../../images/big2.jpg')
                     background-size: cover
                     background-repeat: no-repeat
                     background-position: center
                 .big-card:nth-of-type(3)
                     transform: translate(-37%, -50%) rotate(1deg)
-                    background: url('../images/big3.jpg')
+                    background: url('../../images/big3.jpg')
                     background-size: cover
                     background-repeat: no-repeat
                     background-position: center
                 .big-card:nth-of-type(4)
                     transform: translate(-26%, -50%) rotate(3deg)
-                    background: url('../images/big4.jpg')
+                    background: url('../../images/big4.jpg')
                     background-size: cover
                     background-repeat: no-repeat
                     background-position: center
@@ -285,25 +361,25 @@ footer
 
                     .small-card:nth-of-type(5)
                         transform: translate(75%, -203%) rotate(7deg)
-                        background: url('../images/small1.jpg')
+                        background: url('../../images/small1.jpg')
                         background-size: cover
                         background-repeat: no-repeat
                         background-position: center
                     .small-card:nth-of-type(6)
                         transform: translate(-155%, -203%) rotate(-12deg)
-                        background: url('../images/small2.jpg')
+                        background: url('../../images/small2.jpg')
                         background-size: cover
                         background-repeat: no-repeat
                         background-position: center
                     .small-card:nth-of-type(7)
                         transform: translate(70%, 120%) rotate(9deg)
-                        background: url('../images/small3.jpg')
+                        background: url('../../images/small3.jpg')
                         background-size: cover
                         background-repeat: no-repeat
                         background-position: center
                     .small-card:last-of-type
                         transform: translate(-150%, 123%) rotate(-12deg)
-                        background: url('../images/small4.jpg')
+                        background: url('../../images/small4.jpg')
                         background-size: cover
                         background-repeat: no-repeat
                         background-position: center
@@ -326,25 +402,25 @@ footer
                 &:hover
                     .small-card:nth-of-type(5)
                         transform: translate(75%, -183%) rotate(7deg)
-                        background: url('../images/small1.jpg')
+                        background: url('../../images/small1.jpg')
                         background-size: cover
                         background-repeat: no-repeat
                         background-position: center
                     .small-card:nth-of-type(6)
                         transform: translate(-155%, -187%) rotate(-12deg)
-                        background: url('../images/small2.jpg')
+                        background: url('../../images/small2.jpg')
                         background-size: cover
                         background-repeat: no-repeat
                         background-position: center
                     .small-card:nth-of-type(7)
                         transform: translate(70%, 86%) rotate(9deg)
-                        background: url('../images/small3.jpg')
+                        background: url('../../images/small3.jpg')
                         background-size: cover
                         background-repeat: no-repeat
                         background-position: center
                     .small-card:last-of-type
                         transform: translate(-150%, 87%) rotate(-12deg)
-                        background: url('../images/small4.jpg')
+                        background: url('../../images/small4.jpg')
                         background-size: cover
                         background-repeat: no-repeat
                         background-position: center

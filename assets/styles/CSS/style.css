@@ -4,6 +4,7 @@
   padding: 0;
   -webkit-box-sizing: inherit;
           box-sizing: inherit;
+  -webkit-tap-highlight-color: transparent;
 }
 
 body {
@@ -140,6 +141,108 @@ nav .burger-menu .burger-line {
   transition: all 300ms linear;
 }
 
+#backdrop {
+  display: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1000;
+  background: rgba(0, 0, 0, 0.7);
+}
+
+#quiz-arrow {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 50%;
+  left: 100%;
+  width: 2rem;
+  height: 2rem;
+  -webkit-transform: translateY(-50%);
+          transform: translateY(-50%);
+  color: #000;
+  background: rgba(255, 0, 0, 0.9);
+  padding: 1rem 1rem 2.2rem 1rem;
+  border-bottom-left-radius: 100%;
+  border-top-left-radius: 100%;
+  -webkit-transform: translateX(0.25rem);
+          transform: translateX(0.25rem);
+  font-weight: 700;
+  z-index: 2;
+  cursor: pointer;
+  -webkit-transition: background 300ms linear;
+  transition: background 300ms linear;
+}
+
+#chestionar-UI {
+  display: none;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  width: 70%;
+  max-width: 800px;
+  height: 90%;
+  background: #fff;
+  z-index: 1001;
+}
+
+#chestionar-UI h1 {
+  padding: 1rem 0;
+  text-align: center;
+}
+
+#chestionar-UI .chestionar-UI__text-section {
+  padding: 1rem;
+  font-weight: 700;
+  font-size: 1.5rem;
+  text-align: center;
+}
+
+#chestionar-UI .chestionar-UI__text-section p span {
+  color: #d92626;
+}
+
+#chestionar-UI .chestionar-UI__text-section p span::after {
+  content: '%';
+  color: #000;
+}
+
+#chestionar-UI .chestionar-UI__buttons-section {
+  display: none;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  gap: 3rem;
+  height: 70%;
+}
+
+#chestionar-UI .chestionar-UI__buttons-section .quizButton {
+  padding: 1rem 1.5rem;
+  font-size: 1.15rem;
+  font-weight: 700;
+  border: none;
+  -webkit-box-shadow: 4px 4px 4px 4px rgba(0, 0, 0, 0.4);
+          box-shadow: 4px 4px 4px 4px rgba(0, 0, 0, 0.4);
+}
+
+#chestionar-UI .chestionar-UI__buttons-section #start-quiz__button {
+  background: #62d926;
+}
+
+#chestionar-UI .chestionar-UI__buttons-section #history__button {
+  background: #fef3a6;
+}
+
 main {
   margin-top: 4rem;
 }
@@ -153,6 +256,8 @@ main h1 {
   height: 110vh;
   width: 100%;
   background: #000;
+  -webkit-transform: translateY(-4rem);
+          transform: translateY(-4rem);
 }
 
 #cards-section::before {
@@ -194,7 +299,7 @@ main h1 {
 #cards-section .big-card:first-of-type {
   -webkit-transform: translate(-57%, -50%) rotate(-3deg);
           transform: translate(-57%, -50%) rotate(-3deg);
-  background: url("../images/big1.jpg");
+  background: url("../../images/big1.jpg");
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
@@ -203,7 +308,7 @@ main h1 {
 #cards-section .big-card:nth-of-type(2) {
   -webkit-transform: translate(-50%, -50%) rotate(-1deg);
           transform: translate(-50%, -50%) rotate(-1deg);
-  background: url("../images/big2.jpg");
+  background: url("../../images/big2.jpg");
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
@@ -212,7 +317,7 @@ main h1 {
 #cards-section .big-card:nth-of-type(3) {
   -webkit-transform: translate(-43%, -50%) rotate(1deg);
           transform: translate(-43%, -50%) rotate(1deg);
-  background: url("../images/big3.jpg");
+  background: url("../../images/big3.jpg");
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
@@ -221,7 +326,7 @@ main h1 {
 #cards-section .big-card:nth-of-type(4) {
   -webkit-transform: translate(-36%, -50%) rotate(3deg);
           transform: translate(-36%, -50%) rotate(3deg);
-  background: url("../images/big4.jpg");
+  background: url("../../images/big4.jpg");
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
@@ -259,7 +364,7 @@ main h1 {
 #cards-section:hover .small-card:nth-of-type(5) {
   -webkit-transform: translate(75%, -223%) rotate(7deg);
           transform: translate(75%, -223%) rotate(7deg);
-  background: url("../images/small1.jpg");
+  background: url("../../images/small1.jpg");
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
@@ -268,7 +373,7 @@ main h1 {
 #cards-section:hover .small-card:nth-of-type(6) {
   -webkit-transform: translate(-155%, -223%) rotate(-12deg);
           transform: translate(-155%, -223%) rotate(-12deg);
-  background: url("../images/small2.jpg");
+  background: url("../../images/small2.jpg");
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
@@ -277,7 +382,7 @@ main h1 {
 #cards-section:hover .small-card:nth-of-type(7) {
   -webkit-transform: translate(70%, 150%) rotate(9deg);
           transform: translate(70%, 150%) rotate(9deg);
-  background: url("../images/small3.jpg");
+  background: url("../../images/small3.jpg");
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
@@ -286,7 +391,7 @@ main h1 {
 #cards-section:hover .small-card:last-of-type {
   -webkit-transform: translate(-150%, 143%) rotate(-12deg);
           transform: translate(-150%, 143%) rotate(-12deg);
-  background: url("../images/small4.jpg");
+  background: url("../../images/small4.jpg");
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
@@ -363,7 +468,7 @@ footer ul li a {
   body main #cards-section .big-card:first-of-type {
     -webkit-transform: translate(-67%, -50%) rotate(-3deg);
             transform: translate(-67%, -50%) rotate(-3deg);
-    background: url("../images/big1.jpg");
+    background: url("../../images/big1.jpg");
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
@@ -371,7 +476,7 @@ footer ul li a {
   body main #cards-section .big-card:nth-of-type(2) {
     -webkit-transform: translate(-50%, -50%) rotate(-1deg);
             transform: translate(-50%, -50%) rotate(-1deg);
-    background: url("../images/big2.jpg");
+    background: url("../../images/big2.jpg");
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
@@ -379,7 +484,7 @@ footer ul li a {
   body main #cards-section .big-card:nth-of-type(3) {
     -webkit-transform: translate(-37%, -50%) rotate(1deg);
             transform: translate(-37%, -50%) rotate(1deg);
-    background: url("../images/big3.jpg");
+    background: url("../../images/big3.jpg");
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
@@ -387,7 +492,7 @@ footer ul li a {
   body main #cards-section .big-card:nth-of-type(4) {
     -webkit-transform: translate(-26%, -50%) rotate(3deg);
             transform: translate(-26%, -50%) rotate(3deg);
-    background: url("../images/big4.jpg");
+    background: url("../../images/big4.jpg");
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
@@ -414,7 +519,7 @@ footer ul li a {
   body main #cards-section:hover .small-card:nth-of-type(5) {
     -webkit-transform: translate(75%, -203%) rotate(7deg);
             transform: translate(75%, -203%) rotate(7deg);
-    background: url("../images/small1.jpg");
+    background: url("../../images/small1.jpg");
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
@@ -422,7 +527,7 @@ footer ul li a {
   body main #cards-section:hover .small-card:nth-of-type(6) {
     -webkit-transform: translate(-155%, -203%) rotate(-12deg);
             transform: translate(-155%, -203%) rotate(-12deg);
-    background: url("../images/small2.jpg");
+    background: url("../../images/small2.jpg");
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
@@ -430,7 +535,7 @@ footer ul li a {
   body main #cards-section:hover .small-card:nth-of-type(7) {
     -webkit-transform: translate(70%, 120%) rotate(9deg);
             transform: translate(70%, 120%) rotate(9deg);
-    background: url("../images/small3.jpg");
+    background: url("../../images/small3.jpg");
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
@@ -438,7 +543,7 @@ footer ul li a {
   body main #cards-section:hover .small-card:last-of-type {
     -webkit-transform: translate(-150%, 123%) rotate(-12deg);
             transform: translate(-150%, 123%) rotate(-12deg);
-    background: url("../images/small4.jpg");
+    background: url("../../images/small4.jpg");
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
@@ -469,7 +574,7 @@ footer ul li a {
   body main #cards-section:hover .small-card:nth-of-type(5) {
     -webkit-transform: translate(75%, -183%) rotate(7deg);
             transform: translate(75%, -183%) rotate(7deg);
-    background: url("../images/small1.jpg");
+    background: url("../../images/small1.jpg");
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
@@ -477,7 +582,7 @@ footer ul li a {
   body main #cards-section:hover .small-card:nth-of-type(6) {
     -webkit-transform: translate(-155%, -187%) rotate(-12deg);
             transform: translate(-155%, -187%) rotate(-12deg);
-    background: url("../images/small2.jpg");
+    background: url("../../images/small2.jpg");
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
@@ -485,7 +590,7 @@ footer ul li a {
   body main #cards-section:hover .small-card:nth-of-type(7) {
     -webkit-transform: translate(70%, 86%) rotate(9deg);
             transform: translate(70%, 86%) rotate(9deg);
-    background: url("../images/small3.jpg");
+    background: url("../../images/small3.jpg");
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
@@ -493,7 +598,7 @@ footer ul li a {
   body main #cards-section:hover .small-card:last-of-type {
     -webkit-transform: translate(-150%, 87%) rotate(-12deg);
             transform: translate(-150%, 87%) rotate(-12deg);
-    background: url("../images/small4.jpg");
+    background: url("../../images/small4.jpg");
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
