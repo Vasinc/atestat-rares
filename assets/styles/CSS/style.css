@@ -30,9 +30,18 @@ body {
   display: flex !important;
 }
 
+.display-grid {
+  display: -ms-grid !important;
+  display: grid !important;
+}
+
 .collapse {
   -webkit-transform: translateY(-100%);
           transform: translateY(-100%);
+}
+
+.selected {
+  background: #fef08d !important;
 }
 
 .collapse-burger .burger-line:first-of-type {
@@ -195,6 +204,7 @@ nav .burger-menu .burger-line {
 }
 
 #chestionar-UI .chestionar-UI__text-section {
+  display: none;
   padding: 1rem;
   font-weight: 700;
   font-size: 1.5rem;
@@ -233,6 +243,16 @@ nav .burger-menu .burger-line {
   border: none;
   -webkit-box-shadow: 4px 4px 4px 4px rgba(0, 0, 0, 0.4);
           box-shadow: 4px 4px 4px 4px rgba(0, 0, 0, 0.4);
+  cursor: pointer;
+  -webkit-transition: -webkit-transform 100ms linear;
+  transition: -webkit-transform 100ms linear;
+  transition: transform 100ms linear;
+  transition: transform 100ms linear, -webkit-transform 100ms linear;
+}
+
+#chestionar-UI .chestionar-UI__buttons-section .quizButton:active {
+  -webkit-transform: scale(0.95);
+          transform: scale(0.95);
 }
 
 #chestionar-UI .chestionar-UI__buttons-section #start-quiz__button {
@@ -241,6 +261,88 @@ nav .burger-menu .burger-line {
 
 #chestionar-UI .chestionar-UI__buttons-section #history__button {
   background: #fef3a6;
+}
+
+#chestionar-UI .chestionar-UI__questions-section {
+  display: none;
+  height: 80%;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  gap: 1rem;
+  text-align: center;
+}
+
+#chestionar-UI .chestionar-UI__questions-section p {
+  font-weight: 700;
+  font-size: 1.5rem;
+}
+
+#chestionar-UI .chestionar-UI__questions-section p span {
+  color: #404040;
+}
+
+#chestionar-UI .chestionar-UI__questions-section .answers-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  gap: 2rem;
+}
+
+#chestionar-UI .chestionar-UI__questions-section .answers-container .answers-column {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  gap: 2rem;
+}
+
+#chestionar-UI .chestionar-UI__questions-section .answers-container .answers-column .answer {
+  padding: 1rem 1.5rem;
+  background: red;
+  cursor: pointer;
+}
+
+#chestionar-UI .chestionar-UI__questions-section .answers-container .answers-column .correct {
+  background: green;
+}
+
+#chestionar-UI .chestionar-UI__questions-section .answers-container .answers-column .selected {
+  background: yellow;
+}
+
+#chestionar-UI .chestionar-UI__questions-section #submit-button {
+  padding: .75rem 1rem;
+  border: none;
+  -webkit-box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.3);
+          box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.3);
+  cursor: pointer;
+}
+
+#chestionar-UI .chestionar-UI__result-section {
+  display: none;
+  display: -ms-grid;
+  display: grid;
+  place-content: center;
+  height: 70%;
+  text-align: center;
+  font-weight: 700;
+  font-size: 1.15rem;
+}
+
+#chestionar-UI .chestionar-UI__result-section span {
+  font-size: 1.25rem;
+  color: green;
 }
 
 main {
