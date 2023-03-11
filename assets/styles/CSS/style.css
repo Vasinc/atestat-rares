@@ -276,17 +276,21 @@ nav .burger-menu .burger-line {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  gap: 1rem;
+  gap: .5rem;
   text-align: center;
 }
 
 #chestionar-UI .chestionar-UI__questions-section p {
   font-weight: 700;
-  font-size: 1.5rem;
+  font-size: 1.25rem;
 }
 
 #chestionar-UI .chestionar-UI__questions-section p span {
   color: #404040;
+}
+
+#chestionar-UI .chestionar-UI__questions-section h2 {
+  font-size: 1rem;
 }
 
 #chestionar-UI .chestionar-UI__questions-section .answers-container {
@@ -308,13 +312,13 @@ nav .burger-menu .burger-line {
 }
 
 #chestionar-UI .chestionar-UI__questions-section .answers-container .answers-column .answer {
-  padding: 1rem 1.5rem;
-  background: red;
+  padding: .5rem .75rem;
+  background: #fff;
   cursor: pointer;
-}
-
-#chestionar-UI .chestionar-UI__questions-section .answers-container .answers-column .correct {
-  background: green;
+  border: 1px solid #000;
+  border-radius: .5rem;
+  -webkit-box-shadow: 4px 4px 2px 2px rgba(0, 0, 0, 0.2);
+          box-shadow: 4px 4px 2px 2px rgba(0, 0, 0, 0.2);
 }
 
 #chestionar-UI .chestionar-UI__questions-section .answers-container .answers-column .selected {
@@ -323,6 +327,7 @@ nav .burger-menu .burger-line {
 
 #chestionar-UI .chestionar-UI__questions-section #submit-button {
   padding: .75rem 1rem;
+  font-weight: 700;
   border: none;
   -webkit-box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.3);
           box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.3);
@@ -331,8 +336,6 @@ nav .burger-menu .burger-line {
 
 #chestionar-UI .chestionar-UI__result-section {
   display: none;
-  display: -ms-grid;
-  display: grid;
   place-content: center;
   height: 70%;
   text-align: center;
@@ -343,6 +346,51 @@ nav .burger-menu .burger-line {
 #chestionar-UI .chestionar-UI__result-section span {
   font-size: 1.25rem;
   color: green;
+}
+
+#chestionar-UI .chestionar-UI__history-section {
+  display: none;
+}
+
+#chestionar-UI .chestionar-UI__history-section h2 {
+  text-align: center;
+}
+
+#chestionar-UI .chestionar-UI__history-section .history-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  gap: 4rem;
+  height: 250px;
+  overflow-y: scroll;
+  padding: 2rem;
+}
+
+#chestionar-UI .chestionar-UI__history-section .history-container .history-element {
+  font-weight: 700;
+  font-size: 1.25rem;
+  border-bottom: 1px solid #000;
+}
+
+#chestionar-UI .chestionar-UI__history-section .history-container .history-element .history-result {
+  font-size: 1.35rem;
+  color: #1e5e1e;
+}
+
+#chestionar-UI .chestionar-UI__history-section #history-back__button {
+  padding: .5rem .75rem;
+  background: red;
+  color: #fff;
+  font-weight: 700;
+  border: 1px solid #000;
+  margin-left: 2rem;
+  border-radius: .25rem;
+  -webkit-box-shadow: 4px 4px 2px 2px rgba(0, 0, 0, 0.3);
+          box-shadow: 4px 4px 2px 2px rgba(0, 0, 0, 0.3);
 }
 
 main {
@@ -560,7 +608,41 @@ footer ul li a {
   color: yellow;
 }
 
+@media screen and (min-width: 408px) {
+  body #chestionar-UI .chestionar-UI__history-section .history-container {
+    height: 300px;
+  }
+}
+
 @media screen and (min-width: 600px) {
+  body #chestionar-UI .chestionar-UI__questions-section {
+    gap: 1rem;
+  }
+  body #chestionar-UI .chestionar-UI__questions-section p {
+    font-size: 1.5rem;
+  }
+  body #chestionar-UI .chestionar-UI__questions-section h2 {
+    font-size: 1.5rem;
+  }
+  body #chestionar-UI .chestionar-UI__questions-section .answers-container {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    gap: 2rem;
+  }
+  body #chestionar-UI .chestionar-UI__questions-section .answers-container .answers-column {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    gap: 2rem;
+  }
+  body #chestionar-UI .chestionar-UI__questions-section .answers-container .answers-column .answer {
+    padding: 1rem 1.75rem;
+  }
   body main #cards-section .big-card {
     width: 125px;
   }

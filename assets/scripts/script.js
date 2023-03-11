@@ -19,6 +19,10 @@ const answersContainer = document.querySelector('.answers-container');
 const answers = questionsSection.querySelectorAll('.answer')
 const submitButton = document.getElementById('submit-button');
 const resultText = document.querySelector('.resultText');
+const historySection = document.querySelector('.chestionar-UI__history-section')
+const historyContainer = document.querySelector('.history-container');
+const historyButton = document.getElementById('history__button');
+const historyBackButton = document.getElementById('history-back__button');
 
 let PREVIOUS_SCROLL_VALUE = 0;
 let percentage = 0;
@@ -27,22 +31,9 @@ let rndNum;
 let valueOfAnswer;
 let result = 0;
 let indexOfAnswer;
-
-// @@@@@@@@@@@@@@@@@@
-// ATUNCI CAND DAI PE O INTREBARE, LA LEFT QUESTIONS SA DEA REMOVE LA INTREBAREA PRECEDENTA
-// SA DEA RANDOM RASPUNSURILE
-// SA SCOT CULOAREA DE LA CORECT SI GRESIT
-// SA REFAC UN PIC DESIGNUL LA CHESTIONAR
-
-// CAND TERMINI CHESTIONARUL, SA ITI ADAUGE RASPUNSUL INTR-UN ARRAY
-// CARE RESPECTIVUL ARRAY VA FI ADAUGAT IN LOCAL STORAGE
-// ATUNCI CAND ACCESEZ 'ISTORIC', SA IA DIN ACEL ARRAY TOATE VALORILE SI SA LE PUNA CA SI OUTPUT PE ECRAN
-
-// SA FIE TOT CHESTIONARUL RESPONSIVE
-
-// SA VERIFIC DE BUGURI
-
-// @@@@@@@@@@@@@@@@@@@@@
+let leftQuestions;
+let questionAnswersValues;
+let previousResults = [];
 
 const questions = [
     {
@@ -82,7 +73,7 @@ const questions = [
         }
     },
     {
-        question: "Care a fost conducătorul USSR în al doilea război mondial?",
+        question: "Care a fost conducătorul URSS în al doilea război mondial?",
         answers: {
             'Vladimir Lenin': false,
             'Iosif Stalin': true,
@@ -137,8 +128,6 @@ const questions = [
     }
 ];
 
-let leftQuestions = questions;
-
 // IntersectionObserver
 const observer = new IntersectionObserver(
     entries => {
@@ -156,6 +145,25 @@ h1.forEach(text => {
     observer.observe(text);
 })
 // functions
+function shuffleObject(obj) { // ia un object ca si parametru
+    const entries = Object.entries(obj); // metoda .entries, transforma un obiect intr un sir
+    for (let i = entries.length - 1; i > 0; i--) { // methoda fisher-yates de a amesteca un array
+      const j = Math.floor(Math.random() * (i + 1)); // ia un element diferit din sir
+      [entries[i], entries[j]] = [entries[j], entries[i]]; // inverseaza doua elemente din sir, folosind array destructuring
+    }
+    return Object.fromEntries(entries) // transforma array ul inapoi in object
+  }
+
+function updateHistorySection() {
+    historyContainer.innerHTML = '';
+    for (let i = 0; i < previousResults.length; i++) {
+        const previousResult = previousResults[i];
+        const p = document.createElement('p');
+        p.className = 'history-element'
+        p.innerHTML = `${i+1}. <span class="history-result">${previousResult}</span> / 10`
+        historyContainer.append(p);
+    }
+}
 
 function handleChestionarUI () {
     backdrop.classList.toggle('display-block')
@@ -169,38 +177,32 @@ function handleChestionarUI () {
 }
 
 function updateQuestion() {
-    rndNum = Math.trunc(Math.random() * leftQuestions.length)
-    const questionAnswers = Object.keys(leftQuestions[rndNum].answers);
-    const questionAnswersValues = Object.values(leftQuestions[rndNum].answers);
+    rndNum = Math.trunc(Math.random() * ( leftQuestions.length - 1))
+    const randomizedAnswers = shuffleObject(leftQuestions[rndNum].answers)
+    const questionAnswers = Object.keys(randomizedAnswers);
+    questionAnswersValues = Object.values(randomizedAnswers);
 
     questionText.textContent = leftQuestions[rndNum].question
     for (let i = 0; i < questionAnswers.length; i++) {
         const answerText = questionAnswers[i];
         answers[i].textContent = answerText
-
-        if (questionAnswersValues[i]) {
-            answers[i].style.background = 'green';
-        } else {
-            answers[i].style.background = 'red';
-        }
     }
+
 }
 
 function disableSubmitButton () {
-    submitButton.style.background = 'black';
-    submitButton.style.color = 'white'
+    submitButton.style.background = 'red';
+    submitButton.style.color = 'black'
     submitButton.style.cursor = 'not-allowed'
     submitButton.disabled = true;
 }
 
 function activateSubmitButton () {
-    submitButton.style.background = 'white'
+    submitButton.style.background = 'lightgreen'
     submitButton.style.color = 'black'
     submitButton.style.cursor = 'pointer'
     submitButton.disabled = false;
 }
-
-updateQuestion()
 
 // event listeners
 onload = () => {
@@ -211,7 +213,6 @@ onload = () => {
 
 
     if (JSON.parse(localStorage.getItem('textWasReadValue')) == true ) {
-        console.log('succes')
         textSection.classList.add('display-none');
         buttonsSection.classList.add('display-flex');
         quizArrow.style.background = 'hsl(100, 70%, 50%)'
@@ -220,9 +221,11 @@ onload = () => {
     percentage = localStorage.getItem('percentageValue');
     percentageText.textContent = percentage;
     percentageText.style.color = `hsl(${percentage}, 70%, 50%)`
-    // TO BE REMOVED @@@@@@@@@@@@@@@@@
-    disableSubmitButton()
-    // @@@@@@@@@@@@@@@@@@@@@@@@@
+
+    if(localStorage.getItem('previousResultsData')) {
+        previousResults = JSON.parse(localStorage.getItem('previousResultsData'))
+        updateHistorySection()
+    }
 };
 
 quizArrow.addEventListener('click', handleChestionarUI)
@@ -232,7 +235,9 @@ backdrop.addEventListener('click', handleChestionarUI)
 startQuizButton.addEventListener('click', () => {
     buttonsSection.classList.remove('display-flex')
     questionsSection.classList.add('display-flex')
+    leftQuestions = questions.slice()
     disableSubmitButton()
+    updateQuestion()
 })
 
 answersContainer.addEventListener('click', event => {
@@ -243,7 +248,6 @@ answersContainer.addEventListener('click', event => {
         if ( answer === selected) {
             answer.classList.add('selected')
             indexOfAnswer = Array.prototype.indexOf.call(answers, answer)
-            const questionAnswersValues = Object.values(leftQuestions[rndNum].answers);
 
             valueOfAnswer = questionAnswersValues[indexOfAnswer];
         } else {
@@ -265,19 +269,23 @@ submitButton.addEventListener('click', () => {
     if (valueOfAnswer) {
         result++;
     }
+
+
     updateQuestion();
 
     questionsCounter.textContent = parseInt(questionsCounter.textContent) + 1;
+
+    leftQuestions.splice(rndNum, 1);
 
     disableSubmitButton()
 
     answers[indexOfAnswer].classList.remove('selected')
 
-    console.log(result)
-
     if (submitButton.textContent == 'Termină chestionarul'){
         questionsSection.classList.remove('display-flex')
         resultText.textContent = result;
+        previousResults.push(result);
+        localStorage.setItem('previousResultsData', JSON.stringify(previousResults))
         resultSection.classList.add('display-grid')
         setTimeout(() => {
             resultSection.classList.remove('display-grid')
@@ -285,13 +293,24 @@ submitButton.addEventListener('click', () => {
             questionsCounter.textContent = '1';
             result = 0;
             submitButton.textContent = 'Răspunde'
-        }, 5000);
+            updateHistorySection()
+        }, 3000);
         return;
     }
 
     if (  parseInt(questionsCounter.textContent) == 10 ){
         submitButton.textContent = 'Termină chestionarul'
     }
+})
+
+historyButton.addEventListener('click', () => {
+    historySection.classList.add('display-block')
+    buttonsSection.classList.remove('display-flex')
+})
+
+historyBackButton.addEventListener('click', () => {
+    historySection.classList.remove('display-block')
+    buttonsSection.classList.add('display-flex')
 })
 
 addEventListener('scroll', () => {
