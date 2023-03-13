@@ -58,9 +58,9 @@ const questions = [
         question: "Care dintre următoarele țări au format o alianță?",
         answers: {
             'Japonia, Germania, Italia': true,
-            'Japonia, S.U.A, USSR': false,
+            'Japonia, S.U.A, URSS': false,
             'Italia, Spania, Franța': false,
-            'Germania, Regatul Unit, USSR': false
+            'Germania, Regatul Unit, URSS': false
         }
     },
     {
@@ -121,7 +121,7 @@ const questions = [
         question: "Care dintre următoarele state au ieșit învingătoare?",
         answers: {
             'Italia, Franța, Rusia': false,
-            'SUA, USSR, Marea Britanie': true,
+            'SUA, URSS, Marea Britanie': true,
             'Germania, Japonia, Italia': false,
             'SUA, Italia, Japonia': false
         }
@@ -270,12 +270,14 @@ submitButton.addEventListener('click', () => {
         result++;
     }
 
+    if (leftQuestions.length > 1) {
+        leftQuestions.splice(rndNum, 1);
+    }
 
     updateQuestion();
 
     questionsCounter.textContent = parseInt(questionsCounter.textContent) + 1;
 
-    leftQuestions.splice(rndNum, 1);
 
     disableSubmitButton()
 
