@@ -44,6 +44,11 @@ body {
   background: #fef08d !important;
 }
 
+.animation {
+  -webkit-animation: shake .7s 1;
+          animation: shake .7s 1;
+}
+
 .collapse-burger .burger-line:first-of-type {
   -webkit-transform: translate(0.05rem, 0.6rem) rotate(35deg);
           transform: translate(0.05rem, 0.6rem) rotate(35deg);
@@ -826,6 +831,60 @@ footer ul li a {
   }
   body nav .burger-menu {
     display: none;
+  }
+}
+
+@-webkit-keyframes shake {
+  0% {
+    -webkit-transform: translate(0);
+            transform: translate(0);
+  }
+  20% {
+    -webkit-transform: translate(1em);
+            transform: translate(1em);
+  }
+  40% {
+    -webkit-transform: translate(-1em);
+            transform: translate(-1em);
+  }
+  60% {
+    -webkit-transform: translate(1em);
+            transform: translate(1em);
+  }
+  80% {
+    -webkit-transform: translate(-1em);
+            transform: translate(-1em);
+  }
+  100% {
+    -webkit-transform: translate(0);
+            transform: translate(0);
+  }
+}
+
+@keyframes shake {
+  0% {
+    -webkit-transform: translate(0);
+            transform: translate(0);
+  }
+  20% {
+    -webkit-transform: translate(1em);
+            transform: translate(1em);
+  }
+  40% {
+    -webkit-transform: translate(-1em);
+            transform: translate(-1em);
+  }
+  60% {
+    -webkit-transform: translate(1em);
+            transform: translate(1em);
+  }
+  80% {
+    -webkit-transform: translate(-1em);
+            transform: translate(-1em);
+  }
+  100% {
+    -webkit-transform: translate(0);
+            transform: translate(0);
   }
 }
 /*# sourceMappingURL=style.css.map */

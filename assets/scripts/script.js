@@ -34,6 +34,9 @@ let indexOfAnswer;
 let leftQuestions;
 let questionAnswersValues;
 let previousResults = [];
+let timeoutTime;
+let correctAnswer;
+let answersCanBeSelected = true;
 
 const questions = [
     {
@@ -186,6 +189,7 @@ function updateQuestion() {
     for (let i = 0; i < questionAnswers.length; i++) {
         const answerText = questionAnswers[i];
         answers[i].textContent = answerText
+        answers[i].style.background = '#fff';
     }
 
 }
@@ -242,6 +246,7 @@ startQuizButton.addEventListener('click', () => {
 
 answersContainer.addEventListener('click', event => {
     if (!event.target.className == 'answer') return;
+    if (!answersCanBeSelected) return;
     const selected = event.target
 
     for(const answer of answers ) {
@@ -268,41 +273,65 @@ answersContainer.addEventListener('click', event => {
 submitButton.addEventListener('click', () => {
     if (valueOfAnswer) {
         result++;
+        timeoutTime = 0;
+    } else {
+        timeoutTime = 1000;
+        answersCanBeSelected = false;
+        submitButton.classList.add('animation')
+        disableSubmitButton()
+        answers[indexOfAnswer].classList.remove('selected')
+        for (let i = 0; i < questionAnswersValues.length; i++) {
+            const questionAnswer = questionAnswersValues[i];
+            if (questionAnswer) {
+                answers[i].style.background = '#32CD32'
+            } else {
+                answers[i].style.background = '#fff'
+            }
+        }
     }
 
-    if (leftQuestions.length > 1) {
-        leftQuestions.splice(rndNum, 1);
-    }
+    setTimeout(() => {
+        if (leftQuestions.length > 1) {
+            leftQuestions.splice(rndNum, 1);
+        }
+    
+        if (submitButton.classList.contains('animation')) {
+            submitButton.classList.remove('animation')
+        }
 
-    updateQuestion();
+        updateQuestion();
+    
+        questionsCounter.textContent = parseInt(questionsCounter.textContent) + 1;
+    
+    
+        disableSubmitButton()
+    
+        answers[indexOfAnswer].classList.remove('selected')
+    
+        if (submitButton.textContent == 'Termină chestionarul'){
+            questionsSection.classList.remove('display-flex')
+            resultText.textContent = result;
+            previousResults.push(result);
+            localStorage.setItem('previousResultsData', JSON.stringify(previousResults))
+            resultSection.classList.add('display-grid')
+            setTimeout(() => {
+                resultSection.classList.remove('display-grid')
+                buttonsSection.classList.add('display-flex')
+                questionsCounter.textContent = '1';
+                result = 0;
+                submitButton.textContent = 'Răspunde'
+                updateHistorySection()
+            }, 3000);
+            return;
+        }
+    
+        if (  parseInt(questionsCounter.textContent) == 10 ){
+            submitButton.textContent = 'Termină chestionarul'
+        }
 
-    questionsCounter.textContent = parseInt(questionsCounter.textContent) + 1;
+        answersCanBeSelected = true;
+    }, timeoutTime);
 
-
-    disableSubmitButton()
-
-    answers[indexOfAnswer].classList.remove('selected')
-
-    if (submitButton.textContent == 'Termină chestionarul'){
-        questionsSection.classList.remove('display-flex')
-        resultText.textContent = result;
-        previousResults.push(result);
-        localStorage.setItem('previousResultsData', JSON.stringify(previousResults))
-        resultSection.classList.add('display-grid')
-        setTimeout(() => {
-            resultSection.classList.remove('display-grid')
-            buttonsSection.classList.add('display-flex')
-            questionsCounter.textContent = '1';
-            result = 0;
-            submitButton.textContent = 'Răspunde'
-            updateHistorySection()
-        }, 3000);
-        return;
-    }
-
-    if (  parseInt(questionsCounter.textContent) == 10 ){
-        submitButton.textContent = 'Termină chestionarul'
-    }
 })
 
 historyButton.addEventListener('click', () => {

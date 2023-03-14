@@ -39,6 +39,9 @@ $yellow: #fef3a6
 .selected
     background: darken($yellow, 5%) !important
 
+.animation
+    animation: shake .7s 1
+
 .collapse-burger
     .burger-line:first-of-type
         transform: translate(.05rem, .6rem) rotate(35deg)
@@ -557,3 +560,25 @@ footer
                     border: none
             .burger-menu
                 display: none
+
+
+@keyframes shake
+  0%
+    transform: translate(0);
+
+  20%
+    transform: translate(1em);
+
+  40%
+    transform: translate(-1em);
+
+  60%
+    transform: translate(1em);
+
+  80%
+    transform: translate(-1em);
+
+  100%
+    transform: translate(0);
+
+        
