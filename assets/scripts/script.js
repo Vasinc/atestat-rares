@@ -195,7 +195,7 @@ function updateQuestion() {
 }
 
 function disableSubmitButton () {
-    submitButton.style.background = 'red';
+    submitButton.style.background = 'grey';
     submitButton.style.color = 'black'
     submitButton.style.cursor = 'not-allowed'
     submitButton.disabled = true;
@@ -252,6 +252,7 @@ answersContainer.addEventListener('click', event => {
     for(const answer of answers ) {
         if ( answer === selected) {
             answer.classList.add('selected')
+            console.log('succes')
             indexOfAnswer = Array.prototype.indexOf.call(answers, answer)
 
             valueOfAnswer = questionAnswersValues[indexOfAnswer];
@@ -321,6 +322,7 @@ submitButton.addEventListener('click', () => {
                 result = 0;
                 submitButton.textContent = 'Răspunde'
                 updateHistorySection()
+                answersCanBeSelected = true;
             }, 3000);
             return;
         }
@@ -330,6 +332,7 @@ submitButton.addEventListener('click', () => {
         }
 
         answersCanBeSelected = true;
+
     }, timeoutTime);
 
 })
