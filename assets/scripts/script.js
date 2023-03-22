@@ -359,7 +359,9 @@ historyBackButton.addEventListener('click', () => {
 addEventListener('scroll', () => {
     const currentScrollValue = scrollY;
     if (scrollY > 64 && currentScrollValue > PREVIOUS_SCROLL_VALUE) {
-        nav.classList.add('collapse')
+        if (document.body.style.overflow == 'visible'){
+            nav.classList.add('collapse')
+        }
         PREVIOUS_SCROLL_VALUE = currentScrollValue;
     } else {
         nav.classList.remove('collapse')
@@ -389,6 +391,7 @@ addEventListener('resize', () => {
         document.body.style.overflow = 'visible'
         navContainer.classList.toggle('display-flex')
         burgerMenu.classList.toggle('collapse-burger')
+        quizArrow.style.transform = 'scale(1)';
     }
 })
 
