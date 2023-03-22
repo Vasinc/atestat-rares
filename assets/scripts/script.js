@@ -37,6 +37,7 @@ let previousResults = [];
 let timeoutTime;
 let correctAnswer;
 let answersCanBeSelected = true;
+let lastScrollValue = 0;
 
 const questions = [
     {
@@ -171,11 +172,22 @@ function updateHistorySection() {
 function handleChestionarUI () {
     backdrop.classList.toggle('display-block')
     chestionarUI.classList.toggle('display-block')
-    backdrop.scrollIntoView()
+
+    if (!textWasRead) {
+        quizArrow.classList.toggle('active-state-red')
+    } else{
+        quizArrow.classList.toggle('active-state-green')
+    }
+
     if (backdrop.classList.contains('display-block')) {
         document.body.style.overflow = 'hidden'
+        quizArrow.innerHTML = '>'
+        lastScrollValue = Math.trunc(window.scrollY);
+        backdrop.scrollIntoView()
     } else {
         document.body.style.overflow = 'visible'
+        quizArrow.innerHTML = '<'
+        window.scrollTo(0, lastScrollValue)
     }
 }
 
@@ -215,11 +227,11 @@ onload = () => {
         localStorage.setItem('percentageValue', percentage);
     }
 
-
     if (JSON.parse(localStorage.getItem('textWasReadValue')) == true ) {
         textSection.classList.add('display-none');
         buttonsSection.classList.add('display-flex');
         quizArrow.style.background = 'hsl(100, 70%, 50%)'
+        textWasRead = JSON.parse(localStorage.getItem('textWasReadValue'))
     }
 
     percentage = localStorage.getItem('percentageValue');
@@ -233,8 +245,6 @@ onload = () => {
 };
 
 quizArrow.addEventListener('click', handleChestionarUI)
-
-backdrop.addEventListener('click', handleChestionarUI)
 
 startQuizButton.addEventListener('click', () => {
     buttonsSection.classList.remove('display-flex')
@@ -252,7 +262,6 @@ answersContainer.addEventListener('click', event => {
     for(const answer of answers ) {
         if ( answer === selected) {
             answer.classList.add('selected')
-            console.log('succes')
             indexOfAnswer = Array.prototype.indexOf.call(answers, answer)
 
             valueOfAnswer = questionAnswersValues[indexOfAnswer];
@@ -388,9 +397,11 @@ burgerMenu.addEventListener('click', () => {
     if(navContainer.classList.contains('display-flex')) {
         document.body.style.overflow = 'hidden'
         burgerMenu.classList.toggle('collapse-burger')
+        quizArrow.style.transform = 'scale(0)';
     } else {
         document.body.style.overflow = 'visible'
         burgerMenu.classList.toggle('collapse-burger')
+        quizArrow.style.transform = 'scale(1)';
     }
 })
 
@@ -400,6 +411,7 @@ navContainer.addEventListener('click', event => {
     navContainer.classList.toggle('display-flex')
     burgerMenu.classList.toggle('collapse-burger')
     document.body.style.overflow = 'visible'
+    quizArrow.style.transform = 'scale(1)';
     setTimeout(() => {
         nav.classList.add('collapse')
         PREVIOUS_SCROLL_VALUE = scrollY;
